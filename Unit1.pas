@@ -11,8 +11,11 @@ type
     Button1: TButton;
     Label1: TLabel;
     Button2: TButton;
+    Edit1: TEdit;
+    Button3: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,6 +38,11 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
 begin
         ShowMessage('This is another test');
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+        ShowMessage(Form1.Edit1.Text);
 end;
 
 end.
