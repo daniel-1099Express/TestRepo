@@ -13,6 +13,9 @@ type
     Button2: TButton;
     Edit1: TEdit;
     Button3: TButton;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -33,16 +36,28 @@ implementation
 procedure TForm1.Button1Click(Sender: TObject);
 begin
         Label1.Caption:='This is a test.';
+        if (CheckBox1.Checked = true) then
+                ShowMessage('Test Checkbox 1 is checked')
+        else
+                ShowMessage('Test Checkbox 1 is not checked');
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
         ShowMessage('This is another test');
+        if (CheckBox2.Checked = true) then
+                ShowMessage('Test Checkbox 2 is checked')
+        else
+                ShowMessage('Test Checkbox 2 is not checked');
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 begin
         ShowMessage(Form1.Edit1.Text);
+        if (CheckBox3.Checked = true) then
+                ShowMessage('Test Checkbox 3 is checked')
+        else
+                ShowMessage('Test Checkbox 3 is not checked');
 end;
 
 end.
