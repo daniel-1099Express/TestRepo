@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls;
+  StdCtrls, Menus, StdActns, ActnList, ImgList, ComCtrls, ToolWin;
 
 type
   TForm1 = class(TForm)
@@ -16,6 +16,24 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
+    ImageList1: TImageList;
+    ActionList1: TActionList;
+    EditCopy1: TEditCopy;
+    EditCut1: TEditCut;
+    EditPaste1: TEditPaste;
+    MainMenu1: TMainMenu;
+    File1: TMenuItem;
+    Save1: TMenuItem;
+    N1: TMenuItem;
+    Exit1: TMenuItem;
+    Edit2: TMenuItem;
+    Cut1: TMenuItem;
+    Copy1: TMenuItem;
+    Paste1: TMenuItem;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -59,7 +77,7 @@ begin
                 ShowMessage('Test Checkbox 3 is checked')
         else
                 ShowMessage('Test Checkbox 3 is not checked');
-        if (Edit1.Text != '') then
+        if not (Edit1.Text = '') then
                 Edit1.Text:='';
 end;
 
