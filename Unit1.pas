@@ -54,12 +54,12 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-        Label1.Caption:='This is a test.';
+        Label1.Caption := 'This is a test.';
         if (CheckBox1.Checked = true) then
                 ShowMessage('Test Checkbox 1 is checked')
         else
                 ShowMessage('Test Checkbox 1 is not checked');
-        Label1.Caption:='Label1';
+        Label1.Caption := 'Label1';
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -73,13 +73,15 @@ end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 begin
+        Form1.Edit1.Color := clYellow;
         ShowMessage(Form1.Edit1.Text);
         if (CheckBox3.Checked = true) then
                 ShowMessage('Test Checkbox 3 is checked')
         else
                 ShowMessage('Test Checkbox 3 is not checked');
         if not (Edit1.Text = '') then
-                Edit1.Text:='';
+                Edit1.Text := '';
+        Form1.Edit1.Color := clWhite;
 end;
 
 procedure TForm1.Exit1Click(Sender: TObject);
