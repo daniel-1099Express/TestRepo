@@ -40,6 +40,7 @@ begin
                 ShowMessage('Test Checkbox 1 is checked')
         else
                 ShowMessage('Test Checkbox 1 is not checked');
+        Label1.Caption:='Label1';
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
