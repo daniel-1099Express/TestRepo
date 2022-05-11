@@ -59,6 +59,8 @@ begin
                 ShowMessage('Test Checkbox 3 is checked')
         else
                 ShowMessage('Test Checkbox 3 is not checked');
+        if not (Edit1.Text = '') then
+                Edit1.Text:='';
 end;
 
 end.
