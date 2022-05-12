@@ -34,10 +34,18 @@ type
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
+    Label2: TLabel;
+    Label3: TLabel;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Memo1: TMemo;
+    Go: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Exit1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure GoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,6 +59,11 @@ implementation
 
 
 {$R *.DFM}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+        Memo1.Lines.Clear;
+end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
@@ -84,10 +97,27 @@ begin
         Form1.Edit1.Color := clWhite;
 end;
 
+procedure TForm1.GoClick(Sender: TObject);
+Var
+        v1, v2 : Variant;
+        n1, n2, count : Integer;
+begin
+        Memo1.Lines.Clear;
+        v1 := Edit3.Text;
+        v2 := Edit4.Text;
+        n1 := Integer(v1);
+        n2 := Integer(v2);
+        if (n1 < n2) then
+                For count := n1 to n2 Do
+                        Memo1.Lines.Add(IntToStr(Count))
+        else
+                For count := n1 downto n2 Do
+                        Memo1.Lines.Add(IntToStr(Count));
+end;
+
 procedure TForm1.Exit1Click(Sender: TObject);
 begin
         Close;
 end;
 
 end.
- 
