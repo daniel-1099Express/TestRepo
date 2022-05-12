@@ -40,12 +40,19 @@ type
     Edit4: TEdit;
     Memo1: TMemo;
     Go: TButton;
+    Edit5: TEdit;
+    Edit6: TEdit;
+    Button4: TButton;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Exit1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure GoClick(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -63,6 +70,11 @@ implementation
 procedure TForm1.FormCreate(Sender: TObject);
 begin
         Memo1.Lines.Clear;
+        Label4.Caption := 'Sum: 0.00';
+        Label5.Caption := 'Subtract: 0.00';
+        Label6.Caption := 'Multiply: 0.00';
+        Edit5.Text := '0.00';
+        Edit6.Text := '0.00';
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -113,6 +125,24 @@ begin
         else
                 For count := n1 downto n2 Do
                         Memo1.Lines.Add(IntToStr(Count));
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+Var
+        v1, v2, vSum, vSub, vMul : Variant;
+        sSum, sSub, sMul : String;
+begin
+        v1 := Edit5.Text;
+        v2 := Edit6.Text;
+        vSum := Real(v1) + Real(v2);
+        vSub := Real(v1) - Real(v2);
+        vMul := Real(v1) * Real(v2);
+        Str(vSum:0:2, sSum);
+        Str(vSub:0:2, sSub);
+        Str(vMul:0:2, sMul);
+        Label4.Caption := 'Sum: ' + sSum;
+        Label5.Caption := 'Subtract: ' + sSub;
+        Label6.Caption := 'Multiply: ' + sMul;
 end;
 
 procedure TForm1.Exit1Click(Sender: TObject);
