@@ -167,13 +167,13 @@ procedure TForm1.CheckInteger(Var EdBox : TEdit);
 Var
     I, Code : Integer;
 Begin
+    I := 0;
     { Get text from TEdit control }
     Val(EdBox.Text, I, Code);
     { Error during conversion to Integer? }
-    If Code<>0 Then
+    If Code <> 0 Then
     Begin
-        I:=0;
-        MessageDlg('Please check your input details ?', mtError, [mbOk], 0);
+        MessageDlg('Please check your input details.', mtError, [mbOk], 0);
         EdBox.Text := '0';
         { Get focus back to edit box }
         EdBox.SetFocus;
