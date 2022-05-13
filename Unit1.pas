@@ -56,6 +56,9 @@ type
     procedure Edit3Exit(Sender: TObject);
     procedure Edit4Exit(Sender: TObject);
     procedure CheckInteger(Var EdBox : TEdit);
+    procedure Edit5Exit(Sender: TObject);
+    procedure Edit6Exit(Sender: TObject);
+    procedure CheckReal(Var EdBox : TEdit);
   private
     { Private declarations }
   public
@@ -181,6 +184,36 @@ Begin
         { Pass the integer value to edit box }
         EdBox.Text := IntToStr(I);
 End;
+
+procedure TForm1.Edit5Exit(Sender: TObject);
+begin
+      CheckReal(Edit5);
+end;
+
+procedure TForm1.Edit6Exit(Sender: TObject);
+begin
+      CheckReal(Edit6);
+end;
+
+procedure TForm1.CheckReal(Var EdBox : TEdit);
+Var
+    r : Real;
+    Code : Integer;
+Begin
+    r := 0;
+    { Get text from TEdit control }
+    Val(EdBox.Text, r, Code);
+    { Error during conversion to Integer? }
+    If Code <> 0 Then
+    begin
+        MessageDlg('Please check your input details.', mtError, [mbOk], 0);
+        EdBox.Text := '0.00';
+        { Get focus back to edit box }
+        EdBox.SetFocus;
+    end else
+        { Pass the integer value to edit box }
+        EdBox.Text := Format('%f', [r]);
+end;
 
 end.
 
