@@ -53,6 +53,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure GoClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Edit3Exit(Sender: TObject);
+    procedure Edit4Exit(Sender: TObject);
+    procedure CheckInteger(Var EdBox : TEdit);
   private
     { Private declarations }
   public
@@ -150,10 +153,34 @@ begin
         Close;
 end;
 
-function thisIsATest()
+procedure TForm1.Edit3Exit(Sender: TObject);
 begin
-        ShowMessage('This is a test.');
+        CheckInteger(Edit3);
 end;
+
+procedure TForm1.Edit4Exit(Sender: TObject);
+begin
+        CheckInteger(Edit4);
+end;
+
+procedure TForm1.CheckInteger(Var EdBox : TEdit);
+Var
+    I, Code : Integer;
+Begin
+    I := 0;
+    { Get text from TEdit control }
+    Val(EdBox.Text, I, Code);
+    { Error during conversion to Integer? }
+    If Code <> 0 Then
+    Begin
+        MessageDlg('Please check your input details.', mtError, [mbOk], 0);
+        EdBox.Text := '0';
+        { Get focus back to edit box }
+        EdBox.SetFocus;
+    End Else
+        { Pass the integer value to edit box }
+        EdBox.Text := IntToStr(I);
+End;
 
 end.
 
