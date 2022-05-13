@@ -137,12 +137,12 @@ begin
         vSum := Real(v1) + Real(v2);
         vSub := Real(v1) - Real(v2);
         vMul := Real(v1) * Real(v2);
-        Str(vSum:2, sSum);
-        Str(vSub:2, sSub);
-        Str(vMul:2, sMul);
+        Str(vSum:0:2, sSum);
+        Str(vSub:0:2, sSub);
+        Str(vMul:0:2, sMul);
         Label4.Caption := 'Sum: ' + sSum;
         Label5.Caption := 'Subtract: ' + sSub;
-        Label6.Caption := 'Multiply: ' + sSub;
+        Label6.Caption := 'Multiply: ' + sMul;
 end;
 
 procedure TForm1.Exit1Click(Sender: TObject);

@@ -150,4 +150,10 @@ begin
         Close;
 end;
 
+function thisIsATest()
+begin
+        ShowMessage('This is a test.');
+end;
+
 end.
+
