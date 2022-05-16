@@ -46,6 +46,8 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    ToolButton4: TToolButton;
+    SaveDialog1: TSaveDialog;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -59,6 +61,7 @@ type
     procedure Edit5Exit(Sender: TObject);
     procedure Edit6Exit(Sender: TObject);
     procedure CheckReal(Var EdBox : TEdit);
+    procedure ToolButton4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -81,6 +84,11 @@ begin
         Label6.Caption := 'Multiply: 0.00';
         Edit5.Text := '0.00';
         Edit6.Text := '0.00';
+        with SaveDialog1 do begin
+                InitialDir := ExtractFilePath(Application.ExeName);
+                Filter := 'Text files (*.txt)|*.txt';
+        end;
+        Memo1.ScrollBars := ssBoth;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -215,5 +223,13 @@ Begin
         EdBox.Text := Format('%f', [r]);
 end;
 
-end.
+procedure TForm1.ToolButton4Click(Sender: TObject);
+begin
+        SaveDialog1.FileName := Form1.Caption;
+        if SaveDialog1.Execute then begin
+                Memo1.Lines.SaveToFile(SaveDialog1.FileName + '.txt');
+        Form1.Caption := SaveDialog1.FileName;
+        end;
+end;
 
+end.

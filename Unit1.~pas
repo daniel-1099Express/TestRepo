@@ -46,6 +46,8 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    ToolButton4: TToolButton;
+    SaveDialog1: TSaveDialog;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -56,6 +58,10 @@ type
     procedure Edit3Exit(Sender: TObject);
     procedure Edit4Exit(Sender: TObject);
     procedure CheckInteger(Var EdBox : TEdit);
+    procedure Edit5Exit(Sender: TObject);
+    procedure Edit6Exit(Sender: TObject);
+    procedure CheckReal(Var EdBox : TEdit);
+    procedure ToolButton4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -78,6 +84,11 @@ begin
         Label6.Caption := 'Multiply: 0.00';
         Edit5.Text := '0.00';
         Edit6.Text := '0.00';
+        with SaveDialog1 do begin
+                InitialDir := ExtractFilePath(Application.ExeName);
+                Filter := 'Text files (*.txt)|*.txt';
+        end;
+        Memo1.ScrollBars := ssBoth;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -182,5 +193,42 @@ Begin
         EdBox.Text := IntToStr(I);
 End;
 
-end.
+procedure TForm1.Edit5Exit(Sender: TObject);
+begin
+      CheckReal(Edit5);
+end;
 
+procedure TForm1.Edit6Exit(Sender: TObject);
+begin
+      CheckReal(Edit6);
+end;
+
+procedure TForm1.CheckReal(Var EdBox : TEdit);
+Var
+    r : Real;
+    Code : Integer;
+Begin
+    r := 0;
+    { Get text from TEdit control }
+    Val(EdBox.Text, r, Code);
+    { Error during conversion to Integer? }
+    If Code <> 0 Then
+    begin
+        MessageDlg('Please check your input details.', mtError, [mbOk], 0);
+        EdBox.Text := '0.00';
+        { Get focus back to edit box }
+        EdBox.SetFocus;
+    end else
+        { Pass the integer value to edit box }
+        EdBox.Text := Format('%f', [r]);
+end;
+
+procedure TForm1.ToolButton4Click(Sender: TObject);
+begin
+        SaveDialog1.FileName := Form1.Caption;
+        if SaveDialog1.Execute then begin
+                Memo1.Lines.SaveToFile(SaveDialog1.FileName + '.txt');
+        Form1.Caption := SaveDialog1.FileName;
+end;
+
+end.
