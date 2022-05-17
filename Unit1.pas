@@ -57,6 +57,9 @@ type
     Label6: TLabel;
     SaveDialog1: TSaveDialog;
     OpenDialog1: TOpenDialog;
+    Edit7: TEdit;
+    Label7: TLabel;
+    Button5: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -74,6 +77,8 @@ type
     procedure ToolButton5Click(Sender: TObject);
     procedure Open1Click(Sender: TObject);
     procedure Save1Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    function IsValidEmail(const Value: String): Boolean;
   private
     { Private declarations }
   public
@@ -96,6 +101,7 @@ begin
         Label6.Caption := 'Multiply: 0.00';
         Edit5.Text := '0.00';
         Edit6.Text := '0.00';
+        Edit7.Text := '';
         with OpenDialog1 do begin
                 Options := Options + [ofPathMustExist, ofFileMustExist];
                 InitialDir := ExtractFilePath(Application.ExeName);
@@ -274,6 +280,57 @@ begin
                 Memo1.Lines.LoadFromFile(OpenDialog1.FileName);
         Memo1.SelStart := 0;
         end;
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+begin
+        if IsValidEmail(Edit7.Text) then
+            ShowMessage('Valid Email Address')
+        else
+            ShowMessage('Invalid Email Address');
+end;
+
+function TForm1.IsValidEmail(const Value: String): Boolean;
+  function CheckAllowed(const s: String): Boolean;
+  var
+        i: integer;
+  begin
+        result := false;
+        for i := 1 to Length(s) do
+                begin
+                        // illegal char - no valid address
+                        if not (s[i] in ['a'..'z','A'..'Z','0'..'9','_','-','.','+']) then
+                                Exit;
+                end;
+        result := true;
+  end;
+var
+        i: Integer;
+        namePart, serverPart: String;
+begin
+        result := false;
+
+        i := Pos('@', Value);
+        if (i = 0) then
+                Exit;
+
+        if (pos('..', Value) > 0) or (pos('@@', Value) > 0) or (pos('.@', Value) > 0) then
+                Exit;
+
+        if (pos('.', Value) = 1) or (pos('@', Value) = 1) then
+                Exit;
+
+        namePart := Copy(Value, 1, i - 1);
+        serverPart := Copy(Value, i + 1, Length(Value));
+        if (Length(namePart) = 0)  or (Length(serverPart) < 5) then
+                Exit;  // too short
+
+        i := Pos('.', serverPart);
+        // must have dot and at least 3 places from end
+        if (i = 0) or (i > (Length(serverPart) - 2)) then
+                Exit;
+
+        result := CheckAllowed(namePart) and CheckAllowed(serverPart);
 end;
 
 end.
